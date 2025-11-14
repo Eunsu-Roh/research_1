@@ -1,0 +1,55 @@
+# ============================================================================
+# Quantum Aircraft Classifier Configuration
+# ============================================================================
+
+# 데이터 설정
+data:
+  n_samples: 500
+  test_size: 0.2
+  val_size: 0.1  # train에서 추가로 분리
+  random_seed: 42
+  features:
+    - altitude
+    - speed
+    - temperature
+    - fault_flag
+  
+  # 데이터 생성 파라미터
+  altitude_mean: 1000
+  altitude_std: 300
+  speed_mean: 250
+  speed_std: 50
+  temperature_mean: 15
+  temperature_std: 10
+  fault_probability: 0.2
+
+# 모델 설정
+models:
+  classical_svm:
+    kernel: 'rbf'
+    C: 1.0
+    gamma: 'scale'
+  
+  qsvm:
+    n_qubits: 4
+    sample_size: 100  # 계산 시간 단축용
+  
+  qnn:
+    n_qubits: 4
+    n_layers: 2
+    learning_rate: 0.01
+    epochs: 50
+    batch_size: 32
+
+# 학습 설정
+training:
+  save_checkpoints: true
+  checkpoint_dir: './checkpoints'
+  log_interval: 10
+  
+# 결과 저장
+output:
+  results_dir: './results'
+  save_plots: true
+  save_predictions: true
+  save_models: true
